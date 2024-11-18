@@ -43,16 +43,16 @@ public class PrincipaleJDBC {
             // chargement du driver jdbc
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            // creation de la connection
-//            Properties connectionProps = new Properties();
-//            connectionProps.put("user", userName);
-//            connectionProps.put("password", password);
-//            String urlDB = "jdbc:mysql://" + serverName + ":";
-//            urlDB += portNumber + "/" + dbName;
-//            System.out.println(urlDB);
+//             creation de la connection
+            Properties connectionProps = new Properties();
+            connectionProps.put("user", userName);
+            connectionProps.put("password", password);
+            String urlDB = "jdbc:mysql://" + serverName + ":";
+            urlDB += portNumber + "/" + dbName;
+            System.out.println(urlDB);
 
             // On utilise un setConfig avec toute les donné d'abord
-            DBConnection.setConfig(config);
+//            DBConnection.setConfig(config);
             DBConnection dbConnection = DBConnection.getInstance();
             Connection connect = dbConnection.getConnection();
             //Connection connect = DriverManager.getConnection("jdbc:mysql://db4free.net/testpersonne","scruzlara", "root2014");
