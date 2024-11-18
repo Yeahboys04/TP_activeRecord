@@ -15,15 +15,14 @@ public class PrincipaleJDBC {
     public static void main(String[] args) {
 
         // variables de connection
-        String userName = "root";
-        String password = "root";
-        String serverName = "127.0.0.1";
-        //String portNumber = "3306";
-        String portNumber = "8889"; // Port par défaut sur MAMP
-        String tableName = "personne";
+        String userName = "korban2u";
+        String password = "Vachier2!";
+        String serverName = "localhost";
+        String portNumber = "3306";
+        String tableName = "Personne";
 
         // il faut une base nommee testPersonne !
-        String dbName = "testpersonne";
+        String dbName = "activeRecord";
 
         try {
             // chargement du driver jdbc
