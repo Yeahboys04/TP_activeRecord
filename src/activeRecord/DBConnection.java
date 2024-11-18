@@ -1,22 +1,26 @@
 package activeRecord;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 
 public class DBConnection {
-    private DBConnection dbConnection;
+    private static DBConnection instance;
 
-    private DBConnection(DBConnection dbConnection){
-        this.dbConnection =  dbConnection;
+    private Connection connection;
+    private String connectionProps;
+
+
+    private DBConnection() throws SQLException {
+        this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/activeRecord","korban2u", "Vachier2!");
     }
 
-    public DBConnection DBConnection(){
-
+    public static synchronized DBConnection getInstance() throws SQLException {
+        if(instance == null) instance = new DBConnection();
+        return instance;
     }
-
-
-
-    public setNomDB(String nomDB){
-        Connection connection = new Connection();
-
+    public Connection getConnection(){
+        return connection;
     }
 }

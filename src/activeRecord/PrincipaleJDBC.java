@@ -35,7 +35,8 @@ public class PrincipaleJDBC {
             String urlDB = "jdbc:mysql://" + serverName + ":";
             urlDB += portNumber + "/" + dbName;
             System.out.println(urlDB);
-            Connection connect = DriverManager.getConnection(urlDB, connectionProps);
+            DBConnection dbConnection = DBConnection.getInstance();
+            Connection connect = dbConnection.getConnection();
             //Connection connect = DriverManager.getConnection("jdbc:mysql://db4free.net/testpersonne","scruzlara", "root2014");
             // creation de la table Personne
             String createString = "CREATE TABLE Personne ( "
