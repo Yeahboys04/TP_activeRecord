@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Properties;
 
 public class PrincipaleJDBC {
@@ -14,27 +16,43 @@ public class PrincipaleJDBC {
 
     public static void main(String[] args) {
 
+        HashMap<String,String> config = new HashMap<>();
         // variables de connection
         String userName = "korban2u";
         String password = "Vachier2!";
         String serverName = "localhost";
         String portNumber = "3306";
         String tableName = "Personne";
-
         // il faut une base nommee testPersonne !
         String dbName = "activeRecord";
+
+        config.put("userName",userName);
+        config.put("password",password);
+        config.put("serverName",serverName);
+        config.put("portNumber",portNumber);
+        config.put("tableName",tableName);
+        config.put("dbName",dbName);
+
+
+
+
+
+
 
         try {
             // chargement du driver jdbc
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             // creation de la connection
-            Properties connectionProps = new Properties();
-            connectionProps.put("user", userName);
-            connectionProps.put("password", password);
-            String urlDB = "jdbc:mysql://" + serverName + ":";
-            urlDB += portNumber + "/" + dbName;
-            System.out.println(urlDB);
+//            Properties connectionProps = new Properties();
+//            connectionProps.put("user", userName);
+//            connectionProps.put("password", password);
+//            String urlDB = "jdbc:mysql://" + serverName + ":";
+//            urlDB += portNumber + "/" + dbName;
+//            System.out.println(urlDB);
+
+            // On utilise un setConfig avec toute les donné d'abord
+            DBConnection.setConfig(config);
             DBConnection dbConnection = DBConnection.getInstance();
             Connection connect = dbConnection.getConnection();
             //Connection connect = DriverManager.getConnection("jdbc:mysql://db4free.net/testpersonne","scruzlara", "root2014");
