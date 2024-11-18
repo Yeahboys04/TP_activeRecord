@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
-public class PrincipaleJDBC {
+public class PrincipaleJDBC2 {
 
     // IL FAUT PENSER A AJOUTER MYSQLCONNECTOR AU CLASSPATH
 
@@ -17,10 +17,10 @@ public class PrincipaleJDBC {
         // variables de connection
         String userName = "root";
         String password = "root";
-        String serverName = "127.0.0.1";
+        String serverName = "localhost";
         //String portNumber = "3306";
         String portNumber = "8889"; // Port par défaut sur MAMP
-        String tableName = "personne";
+        String tableName = "Personne";
 
         // il faut une base nommee testPersonne !
         String dbName = "testpersonne";
@@ -34,9 +34,10 @@ public class PrincipaleJDBC {
             connectionProps.put("user", userName);
             connectionProps.put("password", password);
             String urlDB = "jdbc:mysql://" + serverName + ":";
-            urlDB += portNumber + "/" + dbName;
+           urlDB += portNumber + "/" + dbName;
             System.out.println(urlDB);
             Connection connect = DriverManager.getConnection(urlDB, connectionProps);
+            System.out.println("connecté");
             //Connection connect = DriverManager.getConnection("jdbc:mysql://db4free.net/testpersonne","scruzlara", "root2014");
             // creation de la table Personne
             String createString = "CREATE TABLE Personne ( "
