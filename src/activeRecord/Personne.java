@@ -51,7 +51,7 @@ public class Personne {
 
     public static Personne findById(int id) throws SQLException {
         Connection dbconnection = DBConnection.getInstance().getConnection();
-        PreparedStatement stmt = dbconnection.createStatement();
+        Statement stmt = dbconnection.createStatement();
         String query = "SELECT * FROM Personne WHERE id =?";
 
 
