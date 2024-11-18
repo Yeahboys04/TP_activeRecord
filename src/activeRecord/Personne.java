@@ -11,6 +11,7 @@ public class Personne {
         this.id = -1;
         this.nom = nom;
         this.prenom = prenom;
+
     }
 
     public int getId() {
