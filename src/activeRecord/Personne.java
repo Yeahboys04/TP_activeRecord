@@ -31,6 +31,44 @@ public class Personne {
     }
 
 
+    public void setId(int id){
+        this.id = id;
+    }
+
+
+
+    public void save(){
+        if(id > 0){
+            this.update();
+        }else{
+            this.saveNew();
+        }
+    }
+
+
+    private void update(){
+
+    }
+
+    private void saveNew() throws SQLException {
+        Connection conect =DBConnection.getInstance().getConnection();
+        String SQLPrep = "INSERT INTO Personne (nom, prenom) VALUES (?,?);";
+        PreparedStatement prep;
+        prep = connect.prepareStatement(SQLPrep,
+                Statement.RETURN_GENERATED_KEYS);
+        prep.setString(1, "Steven");
+        prep.setString(2, "Spielberg");
+        prep.executeUpdate();
+
+        SQLPrep = "INSERT INTO Personne (nom, prenom) VALUES (?,?);";
+        //l'option RETURN_GENERATED_KEYS permet de récupérer l'id auto increment
+        prep = connect.prepareStatement(SQLPrep,
+                Statement.RETURN_GENERATED_KEYS);
+        prep.setString(1, this.nom);
+        prep.setString(2, this.prenom);
+        prep.executeUpdate();
+    }
+
     public static ArrayList<Personne> findAll() throws SQLException {
         ArrayList<Personne> personnes = new ArrayList<>();
         Connection dbConnection = DBConnection.getInstance().getConnection();
@@ -53,6 +91,9 @@ public class Personne {
         Connection dbconnection = DBConnection.getInstance().getConnection();
         Statement stmt = dbconnection.createStatement();
         String query = "SELECT * FROM Personne WHERE id =?";
+        ResultSet resultSet = stmt.executeQuery(query);
+
+
 
 
     }
