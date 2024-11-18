@@ -1,5 +1,7 @@
 package activeRecord;
 
+import java.sql.Connection;
+
 public class DBConnection {
     private DBConnection dbConnection;
 
@@ -8,6 +10,13 @@ public class DBConnection {
     }
 
     public DBConnection DBConnection(){
+
+    }
+
+
+
+    public setNomDB(String nomDB){
+        Connection connection = new Connection();
 
     }
 }
