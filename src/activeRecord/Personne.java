@@ -55,8 +55,8 @@ public class Personne {
         Connection connection = DBConnection.getInstance().getConnection();
         String SQLprep = "update Personne set nom=?, prenom=? where id=?;";
         PreparedStatement prep1 = connection.prepareStatement(SQLprep);
-        prep1.setString(1, "R_i_d_l_e_y");
-        prep1.setString(2, "S_c_o_t_t");
+        prep1.setString(1, this.nom);
+        prep1.setString(2, this.prenom);
         prep1.setInt(3, 2);
         prep1.execute();
 
