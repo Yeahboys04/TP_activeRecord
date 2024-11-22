@@ -103,15 +103,23 @@ public class Personne {
     }
 
 
-//    public static Personne findById(int id) throws SQLException {
-//
-//        Connection dbconnection = DBConnection.getInstance().getConnection();
-//        Statement stmt = dbconnection.createStatement();
-//        String query = "SELECT * FROM Personne WHERE id =?";
-//        ResultSet resultSet = stmt.executeQuery(query);
-//
-//
-//    }
+    public static Personne findById(int id) throws SQLException {
+
+        Connection dbconnection = DBConnection.getInstance().getConnection();
+        Statement stmt = dbconnection.createStatement();
+        String query = "SELECT * FROM Personne WHERE id = ?";
+        PreparedStatement prep = dbconnection.prepareStatement(query);
+        prep.setInt(1, id);
+        ResultSet resultSet = prep.executeQuery();
+        if(resultSet.next()){
+            String nom = resultSet.getString("nom");
+            String prenom = resultSet.getString("prenom");
+            Personne p = new Personne(nom, prenom);
+            return p;
+        } else {
+            throw new SQLException("Personne non trouvée");
+        }
+    }
 
 
     public static void createTable() throws SQLException {
