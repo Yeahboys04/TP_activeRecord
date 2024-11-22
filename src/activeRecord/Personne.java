@@ -46,7 +46,14 @@ public class Personne {
     }
 
 
-    private void update(){
+    private void update() throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+        String SQLprep = "update Personne set nom=?, prenom=? where id=?;";
+        PreparedStatement prep1 = connection.prepareStatement(SQLprep);
+        prep1.setString(1, "R_i_d_l_e_y");
+        prep1.setString(2, "S_c_o_t_t");
+        prep1.setInt(3, 2);
+        prep1.execute();
 
     }
 
@@ -67,6 +74,13 @@ public class Personne {
         prep.setString(1, this.nom);
         prep.setString(2, this.prenom);
         prep.executeUpdate();
+        int autoInc = -1;
+        ResultSet rs = prep.getGeneratedKeys();
+        if (rs.next()) {
+            autoInc = rs.getInt(1);
+        }
+        System.out.println("**** id utilise lors de l'ajout ****");
+        System.out.println(autoInc);
     }
 
     public static ArrayList<Personne> findAll() throws SQLException {
@@ -95,8 +109,24 @@ public class Personne {
         ResultSet resultSet = stmt.executeQuery(query);
 
 
+    }
 
 
+    public static void createTable() throws SQLException {
+        Connection connect = DBConnection.getInstance().getConnection();
+        String createString = "CREATE TABLE Personne ( "
+                + "ID INTEGER  AUTO_INCREMENT, " + "NOM varchar(40) NOT NULL, "
+                + "PRENOM varchar(40) NOT NULL, " + "PRIMARY KEY (ID))";
+        Statement stmt = connect.createStatement();
+        stmt.executeUpdate(createString);
+    }
+
+
+    public static void deleteTable() throws SQLException {
+        Connection connect = DBConnection.getInstance().getConnection();
+        String drop = "DROP TABLE Personne";
+        Statement stmt = connect.createStatement();
+        stmt.executeUpdate(drop);
     }
 
 
