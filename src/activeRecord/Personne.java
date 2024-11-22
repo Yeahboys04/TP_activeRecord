@@ -47,6 +47,9 @@ public class Personne {
         }
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
     private void update() throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
@@ -63,26 +66,16 @@ public class Personne {
         Connection connect =DBConnection.getInstance().getConnection();
         String SQLPrep = "INSERT INTO Personne (nom, prenom) VALUES (?,?);";
         PreparedStatement prep ;
-        prep = connect.prepareStatement(SQLPrep,
-                Statement.RETURN_GENERATED_KEYS);
-        prep.setString(1, "Steven");
-        prep.setString(2, "Spielberg");
-        prep.executeUpdate();
-
-        SQLPrep = "INSERT INTO Personne (nom, prenom) VALUES (?,?);";
-        //l'option RETURN_GENERATED_KEYS permet de récupérer l'id auto increment
-        prep = connect.prepareStatement(SQLPrep,
-                Statement.RETURN_GENERATED_KEYS);
-        prep.setString(1, this.nom);
+        prep = connect.prepareStatement(SQLPrep,Statement.RETURN_GENERATED_KEYS);
+        prep.setString(1,this.nom);
         prep.setString(2, this.prenom);
         prep.executeUpdate();
-        int autoInc = -1;
         ResultSet rs = prep.getGeneratedKeys();
         if (rs.next()) {
-            autoInc = rs.getInt(1);
+            this.id = rs.getInt(1);
         }
         System.out.println("**** id utilise lors de l'ajout ****");
-        System.out.println(autoInc);
+        System.out.println(this.id);
     }
 
     public static ArrayList<Personne> findAll() throws SQLException {
@@ -138,6 +131,8 @@ public class Personne {
         Statement stmt = connect.createStatement();
         stmt.executeUpdate(drop);
     }
+
+
 
 
 
