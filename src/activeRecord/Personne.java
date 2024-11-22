@@ -52,12 +52,13 @@ public class Personne {
     }
 
     private void update() throws SQLException {
+        System.out.println("update");
         Connection connection = DBConnection.getInstance().getConnection();
         String SQLprep = "update Personne set nom=?, prenom=? where id=?;";
         PreparedStatement prep1 = connection.prepareStatement(SQLprep);
         prep1.setString(1, this.nom);
         prep1.setString(2, this.prenom);
-        prep1.setInt(3, 2);
+        prep1.setInt(3, this.id);
         prep1.execute();
 
     }
@@ -91,8 +92,9 @@ public class Personne {
             Personne p = new Personne(nom, prenom);
             p.setId(id);
             personnes.add(p);
+            System.out.println("->("+ id + ")"+ nom + ","+ prenom);
         }
-        statement.close();
+
         return personnes;
     }
 
@@ -109,7 +111,7 @@ public class Personne {
             String nom = resultSet.getString("nom");
             String prenom = resultSet.getString("prenom");
             Personne p = new Personne(nom, prenom);
-            p.setId(id);
+            p.id= id;
             return p;
         } else {
             throw new SQLException("Personne non trouvée");
@@ -117,7 +119,8 @@ public class Personne {
     }
 
 
-    public static void createTable() throws SQLException {
+    public static void createTable() throws SQLException , ClassNotFoundException {
+        System.out.println("Create table");
         Connection connect = DBConnection.getInstance().getConnection();
         String createString = "CREATE TABLE Personne ( "
                 + "ID INTEGER  AUTO_INCREMENT, " + "NOM varchar(40) NOT NULL, "
@@ -127,7 +130,7 @@ public class Personne {
     }
 
 
-    public static void deleteTable() throws SQLException {
+    public static void deleteTable() throws SQLException, ClassNotFoundException{
         Connection connect = DBConnection.getInstance().getConnection();
         String drop = "DROP TABLE Personne";
         Statement stmt = connect.createStatement();
@@ -135,10 +138,12 @@ public class Personne {
     }
 
 
-
-
-
-
-
-
+    @Override
+    public String toString() {
+        return "Personne{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                '}';
+    }
 }
