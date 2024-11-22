@@ -51,9 +51,9 @@ public class Personne {
     }
 
     private void saveNew() throws SQLException {
-        Connection conect =DBConnection.getInstance().getConnection();
+        Connection connect =DBConnection.getInstance().getConnection();
         String SQLPrep = "INSERT INTO Personne (nom, prenom) VALUES (?,?);";
-        PreparedStatement prep;
+        PreparedStatement prep ;
         prep = connect.prepareStatement(SQLPrep,
                 Statement.RETURN_GENERATED_KEYS);
         prep.setString(1, "Steven");
