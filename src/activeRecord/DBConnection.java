@@ -16,7 +16,7 @@ public class DBConnection {
 
 
     private DBConnection() throws SQLException {
-        this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/activeRecord","korban2u", "Vachier2!");
+        this.connection = DriverManager.getConnection("jdbc:mysql://localhost:8889/testpersonne","root", "root");
     }
 
     public static synchronized DBConnection getInstance() throws SQLException {

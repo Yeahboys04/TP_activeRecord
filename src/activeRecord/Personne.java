@@ -31,13 +31,15 @@ public class Personne {
     }
 
 
-    public void setId(int id){
-        this.id = id;
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
 
-
-    public void save(){
+    public void save() throws SQLException {
         if(id > 0){
             this.update();
         }else{
@@ -101,15 +103,15 @@ public class Personne {
     }
 
 
-    public static Personne findById(int id) throws SQLException {
-
-        Connection dbconnection = DBConnection.getInstance().getConnection();
-        Statement stmt = dbconnection.createStatement();
-        String query = "SELECT * FROM Personne WHERE id =?";
-        ResultSet resultSet = stmt.executeQuery(query);
-
-
-    }
+//    public static Personne findById(int id) throws SQLException {
+//
+//        Connection dbconnection = DBConnection.getInstance().getConnection();
+//        Statement stmt = dbconnection.createStatement();
+//        String query = "SELECT * FROM Personne WHERE id =?";
+//        ResultSet resultSet = stmt.executeQuery(query);
+//
+//
+//    }
 
 
     public static void createTable() throws SQLException {
@@ -128,6 +130,9 @@ public class Personne {
         Statement stmt = connect.createStatement();
         stmt.executeUpdate(drop);
     }
+
+
+
 
 
 
