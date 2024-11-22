@@ -89,6 +89,7 @@ public class Personne {
             String nom = resultSet.getString("nom");
             String prenom = resultSet.getString("prenom");
             Personne p = new Personne(nom, prenom);
+            p.setId(id);
             personnes.add(p);
         }
         statement.close();
