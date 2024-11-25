@@ -1,5 +1,7 @@
 package activeRecord;
 
+import java.sql.*;
+
 public class Film {
     String titre;
     int id;
@@ -27,4 +29,32 @@ public class Film {
     public void setId(int id) {
         this.id = id;
     }
+
+    public void getRealisateur(){
+
+    }
+
+
+    public Film findfilmById(int id)throws SQLException{
+        Connection dbconnection = DBConnection.getInstance().getConnection();
+        Statement stmt = dbconnection.createStatement();
+        String query = "SELECT * FROM FILM WHERE id = ?";
+        PreparedStatement pstmt = dbconnection.prepareStatement(query);
+        pstmt.setInt(1, id);
+        ResultSet resultSet = pstmt.executeQuery();
+        if(resultSet.next()){
+            String titre = resultSet.getString("titre");
+            int id_rea = resultSet.getInt("id_rea");
+            Film f = new Film(titre ,new Personne());
+        }
+
+
+
+    }
+
+
+
+
+
+
 }
