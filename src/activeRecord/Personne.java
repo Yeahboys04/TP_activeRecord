@@ -114,8 +114,40 @@ public class Personne {
             p.id= id;
             return p;
         } else {
-            throw new SQLException("Personne non trouvée");
+            return  null;
         }
+    }
+
+    public static ArrayList<Personne> findByName(String name) throws SQLException {
+        ArrayList<Personne> personnes = new ArrayList<>();
+        Connection dbConnection = DBConnection.getInstance().getConnection();
+        Statement statement = dbConnection.createStatement();
+        String query = "SELECT * FROM Personne WHERE nom = ?";
+        PreparedStatement prep = dbConnection.prepareStatement(query);
+        prep.setString(1, name);
+        ResultSet resultSet = prep.executeQuery();
+        while(resultSet.next()){
+            int id = resultSet.getInt("id");
+            String nom = resultSet.getString("nom");
+            String prenom = resultSet.getString("prenom");
+            Personne p = new Personne(nom, prenom);
+            p.setId(id);
+            personnes.add(p);
+            System.out.println("->("+ id + ")"+ nom + ","+ prenom);
+        }
+
+        return personnes;
+    }
+
+    public void delete() throws SQLException {
+        Connection dbConnection = DBConnection.getInstance().getConnection();
+        Statement statement = dbConnection.createStatement();
+        String query = "DELETE FROM Personne WHERE id = ?";
+        PreparedStatement prep = dbConnection.prepareStatement(query);
+
+        prep.setInt(1, this.id);
+        prep.executeUpdate();
+        this.id = -1;
     }
 
 

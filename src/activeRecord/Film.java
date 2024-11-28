@@ -1,5 +1,6 @@
 package activeRecord;
 
+
 public class Film {
     String titre;
     int id;
@@ -24,7 +25,10 @@ public class Film {
         return id;
     }
 
+
     public void setId(int id) {
         this.id = id;
     }
+
+
 }
