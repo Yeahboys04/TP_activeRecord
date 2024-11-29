@@ -81,7 +81,12 @@ public class Film {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return Personne.findById(id_real);
+        Personne p = Personne.findById(id_real);
+        if(p == null){
+            throw new RealisateurAbsentException("Realisateur introuvable");
+        } else {
+            return p;
+        }
     }
 
     public Personne getRealisateur() {
