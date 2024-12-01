@@ -97,5 +97,9 @@ public class Film {
             return null;
         }
     }
+
+    public void setTitre(String test2) {
+        this.titre = test2;
+    }
 }
 
